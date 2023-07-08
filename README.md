@@ -4,7 +4,13 @@ Here it sits the main configuration files for my WSL 2 Ubuntu setup.
 
 The file ``setup.sh`` holds the commands for setting up all you need. It installs the main development packages and technologies, as well as it configures your zsh terminal accordingly to what you're already familiar with.
 
-The easiest way to get the job done is just copying the file content, then pasting it in your Ubuntu shell.
+The easiest way to get the job done is just copying the file content, then pasting it in your Ubuntu shell. But another option is creating a file and pasting the ``setup.sh`` content into that, then executing it:
+
+```bash
+chmod +x setup.sh
+sudo ./setup.sh
+```
+
 
 ## WSL2 Setup
 
