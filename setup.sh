@@ -55,6 +55,9 @@ sudo apt install -y fonts-powerline
 # apply config files
 cd ~ && mkdir setup && cd setup
 
+git config --global user.email "gustax.dev@gmail.com"
+git config --global user.name "Gustavo H. S. Oliveira" 
+
 git init
 git clone https://github.com/gustavenrique/ubuntu-setup.git
 
