@@ -1,9 +1,7 @@
 #!/bin/sh
 
-set -x
-
 # functions that do all the job
-function initial_setup() {
+initial_setup() {
     cd $HOME
     
     # update package list and download them
@@ -14,13 +12,13 @@ function initial_setup() {
     sudo apt install -y git
 }
 
-function install_node() {
+install_node() {
     curl -sL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
 
     sudo apt install -y nodejs
 }
 
-function install_docker_kind_and_k8s() {
+install_docker_kind_and_k8s() {
     # install docker - https://docs.docker.com/engine/install/ubuntu/
     sudo sh -c "$(curl -fsSL https://get.docker.com)"
 
@@ -39,7 +37,7 @@ function install_docker_kind_and_k8s() {
     sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 }
 
-function install_zsh() {
+install_zsh() {
     # install zsh and oh my zsh - https://github.com/ohmyzsh/ohmyzsh
     sudo apt install -y zsh
 
@@ -53,7 +51,7 @@ function install_zsh() {
     sudo apt install -y fonts-powerline
 }
 
-function setup_shell() {
+setup_shell() {
     # apply config files
     cd ~ && git clone https://github.com/gustavenrique/ubuntu-setup.git ./setup
 
@@ -65,7 +63,7 @@ function setup_shell() {
     ln -s ~/setup/.p10k.zsh ~/.p10k.zsh
 }
 
-function do_install() {
+do_install() {
     initial_setup
     sudo install_node & 
     sudo install_docker_kind_and_k8s & 
@@ -81,6 +79,6 @@ function do_install() {
     Grant current user access command: sudo usermod -aG docker $USER'
 }
 
-# wrapped up in a function so that we have some protection against only getting
+# wrapped up in a so that we have some protection against only getting
 # half the file during "curl | sh"
 do_install
