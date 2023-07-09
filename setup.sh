@@ -58,7 +58,7 @@ install_zsh() {
     ln -s ~/setup/.p10k.zsh ~/.p10k.zsh
 
     # change default shell
-    sudo chsh -s $(which zsh)
+    chsh -s $(which zsh)
 }
 
 setup_ubuntu() {
