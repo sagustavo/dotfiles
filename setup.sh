@@ -46,6 +46,8 @@ install_zsh() {
 
     # install fonts for p10k
     sudo apt install -y fonts-powerline
+
+    setup_zsh
 }
 
 setup_zsh() {
@@ -71,7 +73,7 @@ setup_ubuntu() {
     wait
 
     install_zsh
-    setup_zsh
+    wait
     clear
 
     echo "Well done! Now restart your terminal to apply the changes"
