@@ -48,6 +48,8 @@ install_zsh() {
     sudo apt install -y fonts-powerline
 
     # apply config files
+    sudo apt install bc
+    
     cd ~ && git clone https://github.com/gustavenrique/ubuntu-setup.git ./setup
 
     # create symlink to reference the versioned files
@@ -63,8 +65,8 @@ setup_ubuntu() {
     install_node & 
     install_docker_kind_and_k8s & 
     install_zsh &
-    wait
 
+    wait
     clear
 
     echo "Git: $(git --version)"
