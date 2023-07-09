@@ -73,7 +73,6 @@ setup_ubuntu() {
     wait
 
     install_zsh
-    wait
     clear
 
     echo "Well done! Now restart your terminal to apply the changes"
