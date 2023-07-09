@@ -5,7 +5,7 @@ initial_setup() {
     sudo apt update && sudo apt -y upgrade
 
     # install essential packages for development
-    sudo apt install -y build-essential
+    sudo apt install -y build-essential bc
     sudo apt install -y git
 }
 
@@ -48,8 +48,6 @@ install_zsh() {
     sudo apt install -y fonts-powerline
 
     # apply config files
-    sudo apt install bc
-    
     cd ~ && git clone https://github.com/gustavenrique/ubuntu-setup.git ./setup
 
     # create symlink to reference the versioned files
@@ -58,6 +56,9 @@ install_zsh() {
     ln -s ~/setup/.bashrc ~/.bashrc
     ln -s ~/setup/.zshrc ~/.zshrc
     ln -s ~/setup/.p10k.zsh ~/.p10k.zsh
+
+    # change default shell
+    chsh -s $(which zsh)
 }
 
 setup_ubuntu() {
@@ -69,14 +70,7 @@ setup_ubuntu() {
     wait
     clear
 
-    echo "Git: $(git --version)"
-    echo "Node: $(node -v)" 
-    echo "NPM: $(npm -v)"
-    echo "Docker: $(docker --version)"
-    echo "Kind: $(kind --version)"
-    echo "Kubernetes: $(kubectl version --ouput=json)"
-
-    echo "\nNow start zsh through the 'zsh' command and you're ready to go!"
+    echo "Well done! Now restart your terminal to apply the changes"
 }
 
 setup_ubuntu
