@@ -64,7 +64,6 @@ setup_zsh() {
 
     # change default shell
     chsh -s $(which zsh)
-    clear
 }
 
 setup_ubuntu() {
@@ -74,8 +73,6 @@ setup_ubuntu() {
     wait
 
     install_zsh
-
-    echo "Well done! Now restart your terminal to apply the changes"
 }
 
 setup_ubuntu
