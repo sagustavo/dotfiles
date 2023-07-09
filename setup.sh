@@ -1,21 +1,5 @@
 #!/bin/bash
 
-GITHUB_ACCESS_TOKEN=
-
-if [-z $GITHUB_ACCESS_TOKEN]
-then
-    echo 'Must provide credentials to get the dotfiles, because the repo is private'
-else
-    initial_setup
-    install_node & install_docker_kind_and_k8s & install_zsh &
-    wait
-    setup_shell
-
-    zsh
-
-    git --version && node -v && npm -v && docker --version && kind --version && kubectl version
-fi
-
 # functions that do all the job
 function initial_setup() {
     # update package list and download them
@@ -58,7 +42,8 @@ function install_zsh() {
     yes "n" | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
     # install p10k - https://github.com/romkatv/powerlevel10k#installation
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+    echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
 
     # install fonts for p10k
     sudo apt install -y fonts-powerline
@@ -66,18 +51,26 @@ function install_zsh() {
 
 function setup_shell() {
     # apply config files
-    cd ~ && mkdir setup && cd setup
-
-    git config --global user.email "gustax.dev@gmail.com"
-    git config --global user.name "Gustavo H. S. Oliveira"
-
-    git init
-    echo -e "gustavenrique\n$GITHUB_ACCESS_TOKEN" | git clone https://github.com/gustavenrique/ubuntu-setup.git .
+    cd ~ && git clone https://github.com/gustavenrique/ubuntu-setup.git ./setup
 
     # create symlink to reference the versioned files
-    cd ~ && rm .bashrc .zshrc .p10k.zsh
+    rm .bashrc .zshrc .p10k.zsh
 
     ln -s ~/setup/.bashrc ~/.bashrc
     ln -s ~/setup/.zshrc ~/.zshrc
     ln -s ~/setup/.p10k.zsh ~/.p10k.zsh
 }
+
+initial_setup
+sudo install_node & 
+sudo install_docker_kind_and_k8s & 
+sudo install_zsh &
+wait
+setup_shell
+
+zsh
+
+git --version && node -v && npm -v && docker --version && kind --version && kubectl version
+
+echo 'If you come up with access errors while executing Docker commands, give it a try to the\n
+Grant current user access command: sudo usermod -aG docker $USER'

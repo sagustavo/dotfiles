@@ -1,39 +1,38 @@
 # Ubuntu Setup
 
-Here it sits the main configuration files for my WSL 2 Ubuntu setup.
+Here it sits the main configuration files for my personal WSL2 Ubuntu setup.
 
-The file ``setup.sh`` holds the commands for setting up all you need. It installs the main development packages and technologies, as well as it configures your zsh terminal accordingly to what you're already familiar with.
+The file ``setup.sh`` holds the commands for setting up all you need. It installs the main development packages and technologies, as well as it configures the zsh.
 
-A way of executing the script is creating a file and pasting the ``setup.sh`` content into it. Then you'd have to set the ``$GITHUB_ACCESS_TOKEN`` variable with the token generated in ``Github > Settings > Developer settings > Personal access tokens > Tokens (classic) > Generate new token``
-
-After that, you can finally execute the script:
+An easy way of getting the job done is just executing the following in your brand new Linux shell:
 ```bash
-chmod +x setup.sh
-sudo ./setup.sh
-rm setup.sh
+sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/gustavenrique/ubuntu-setup/main/setup.sh)"
 ```
+
+After installing everything, if you open the zsh in VS Code, you might notice that some characters don't display properly. If that's your case, you just need to go to ``Settings > Remote (WSL: Ubuntu)``, then in the Font Family field you paste the following: MesloLGS NF Regular. Notice you need to have the [MesloLGS font](https://github.com/romkatv/powerlevel10k#manual-font-installation) installed.
 
 ## WSL2 Setup
 
-In powershell, paste the following
-
+If you haven't yet installed the WSL 2 Ubuntu and it's using Windows 11, it can be easily done by pasting the following in your PowerShell:
 ```powershell
 wsl --update
 wsl --set-default-version 2
 wsl --install
 ```
 
-Now in the Ubuntu terminal
+After creating the OS user, create the .wslconfig file:
 ```bash
 # Limit the resources that Ubuntu can use
-touch /mnt/c/Users/gusta/.wslconfig
-code /mnt/c/Users/gusta/.wslconfig
+touch /mnt/c/Users/your_windows_user/.wslconfig
+code /mnt/c/Users/your_windows_user/.wslconfig
 ```
 
-Paste the following in the .wslconfig
+Then finally paste the following
 ```bash
 [wsl2]
 memory=8GB
 processors=4
 swap=4GB
 ```
+
+Now you can execute the ``setup.sh`` script.

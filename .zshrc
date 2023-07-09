@@ -224,4 +224,4 @@ function widget::select-all() {
 zle -N widget::select-all
 bindkey '^a' widget::select-all
 # ctrl+z
-bindkey "^Z" undo
+bindkey "^Z" undosource ~/powerlevel10k/powerlevel10k.zsh-theme
