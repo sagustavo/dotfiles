@@ -46,9 +46,7 @@ install_zsh() {
 
     # install fonts for p10k
     sudo apt install -y fonts-powerline
-}
 
-setup_shell() {
     # apply config files
     cd ~ && git clone https://github.com/gustavenrique/ubuntu-setup.git ./setup
 
@@ -61,14 +59,15 @@ setup_shell() {
 }
 
 setup_ubuntu() {
-    sudo initial_setup
-    sudo install_node & 
-    sudo install_docker_kind_and_k8s & 
-    sudo install_zsh &
+    initial_setup
+    install_node & 
+    install_docker_kind_and_k8s & 
+    install_zsh &
     wait
-    sudo setup_shell
 
-    git --version & node -v & npm -v & docker --version & kind --version & kubectl version &
+    clear
+
+    git --version && node -v && npm -v && docker --version && kind --version && kubectl version
 
     echo "Now start zsh through the 'zsh' command and you're ready to go!"
 }
