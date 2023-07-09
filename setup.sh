@@ -46,8 +46,9 @@ install_zsh() {
 
     # install fonts for p10k
     sudo apt install -y fonts-powerline
+}
 
-    # apply config files
+setup_zsh() {
     cd ~ && git clone https://github.com/gustavenrique/ubuntu-setup.git ./setup
 
     # create symlink to reference the versioned files
@@ -65,9 +66,10 @@ setup_ubuntu() {
     initial_setup
     install_node & 
     install_docker_kind_and_k8s & 
-
     wait
+    
     install_zsh
+    setup_zsh
     clear
 
     echo "Well done! Now restart your terminal to apply the changes"
