@@ -1,22 +1,21 @@
 #!/bin/bash
 
-# functions that do all the job
-function initial_setup() {
+initial_setup() {
     # update package list and download them
     sudo apt update && sudo apt -y upgrade
 
     # install essential packages for development
-    sudo apt install -y build-essential
+    sudo apt install -y build-essential bc
     sudo apt install -y git
 }
 
-function install_node() {
+install_node() {
     curl -sL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
 
     sudo apt install -y nodejs
 }
 
-function install_docker_kind_and_k8s() {
+install_docker_kind_and_k8s() {
     # install docker - https://docs.docker.com/engine/install/ubuntu/
     sudo sh -c "$(curl -fsSL https://get.docker.com)"
 
@@ -35,7 +34,7 @@ function install_docker_kind_and_k8s() {
     sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 }
 
-function install_zsh() {
+install_zsh() {
     # install zsh and oh my zsh - https://github.com/ohmyzsh/ohmyzsh
     sudo apt install -y zsh
 
@@ -47,30 +46,33 @@ function install_zsh() {
 
     # install fonts for p10k
     sudo apt install -y fonts-powerline
+
+    setup_zsh
 }
 
-function setup_shell() {
-    # apply config files
+setup_zsh() {
     cd ~ && git clone https://github.com/gustavenrique/ubuntu-setup.git ./setup
 
     # create symlink to reference the versioned files
-    rm .bashrc .zshrc .p10k.zsh
+    [ -e .bashrc ] && rm .bashrc
+    [ -e .zshrc ] && rm .zshrc
+    [ -e .p10k.zsh ] && rm .p10k.zsh
 
     ln -s ~/setup/.bashrc ~/.bashrc
     ln -s ~/setup/.zshrc ~/.zshrc
     ln -s ~/setup/.p10k.zsh ~/.p10k.zsh
+
+    # change default shell
+    chsh -s $(which zsh)
 }
 
-initial_setup
-sudo install_node & 
-sudo install_docker_kind_and_k8s & 
-sudo install_zsh &
-wait
-setup_shell
+setup_ubuntu() {
+    initial_setup
+    install_node & 
+    install_docker_kind_and_k8s & 
+    wait
 
-zsh
+    install_zsh
+}
 
-git --version && node -v && npm -v && docker --version && kind --version && kubectl version
-
-echo 'If you come up with access errors while executing Docker commands, give it a try to the\n
-Grant current user access command: sudo usermod -aG docker $USER'
+setup_ubuntu
