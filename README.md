@@ -13,15 +13,9 @@ The file ``setup.sh`` holds the commands for setting up all you need. It install
 sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/gustavenrique/ubuntu-setup/main/setup.sh)"
 ```
 
-2. After restarting the terminal, you should by default be using zsh. Now check if everything was installed correctly:
+2. After restarting the terminal, you should be using zsh by default. Now check if everything was installed correctly:
 ```bash
-echo "
-Git: $(git --version)\n
-Node: $(node -v)\n
-NPM: $(npm -v)\n
-Docker: $(docker --version)\n
-Kind: $(kind --version)\n
-Kubernetes: $(kubectl version --output=json)"
+echo "Git: $(git --version)\n Node: $(node -v)\n NPM: $(npm -v)\n Docker: $(docker --version)\n Kind: $(kind --version)\n Kubernetes: $(kubectl version --output=json)"
 ```
 
 3. After running a docker command, like ``docker ps``, if you face an access error, give it a try to this grant access command:
@@ -47,7 +41,7 @@ wsl --set-default-version 2
 wsl --install
 ```
 
-After creating the OS user, create the .wslconfig file:
+After creating the Linux user, create the .wslconfig file:
 ```bash
 # Limit the resources that Ubuntu can use
 touch /mnt/c/Users/your_windows_user/.wslconfig

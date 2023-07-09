@@ -58,16 +58,16 @@ install_zsh() {
     ln -s ~/setup/.p10k.zsh ~/.p10k.zsh
 
     # change default shell
-    chsh -s $(which zsh)
+    sudo chsh -s $(which zsh)
 }
 
 setup_ubuntu() {
     initial_setup
     install_node & 
     install_docker_kind_and_k8s & 
-    install_zsh &
 
     wait
+    install_zsh
     clear
 
     echo "Well done! Now restart your terminal to apply the changes"
