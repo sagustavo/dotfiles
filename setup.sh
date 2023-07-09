@@ -1,9 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 
-# functions that do all the job
 initial_setup() {
-    cd $HOME
-    
     # update package list and download them
     sudo apt update && sudo apt -y upgrade
 
@@ -63,22 +60,17 @@ setup_shell() {
     ln -s ~/setup/.p10k.zsh ~/.p10k.zsh
 }
 
-do_install() {
-    initial_setup
+setup_ubuntu() {
+    sudo initial_setup
     sudo install_node & 
     sudo install_docker_kind_and_k8s & 
     sudo install_zsh &
     wait
-    setup_shell
-    
-    zsh
-    
-    git --version && node -v && npm -v && docker --version && kind --version && kubectl version
-    
-    echo 'If you come up with access errors while executing Docker commands, give it a try to the\n
-    Grant current user access command: sudo usermod -aG docker $USER'
+    sudo setup_shell
+
+    git --version & node -v & npm -v & docker --version & kind --version & kubectl version &
+
+    echo "Now start zsh through the 'zsh' command and you're ready to go!"
 }
 
-# wrapped up in a so that we have some protection against only getting
-# half the file during "curl | sh"
-do_install
+setup_ubuntu
