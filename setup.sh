@@ -67,9 +67,14 @@ setup_ubuntu() {
 
     clear
 
-    git --version && node -v && npm -v && docker --version && kind --version && kubectl version
+    echo "Git: $(git --version)"
+    echo "Node: $(node -v)" 
+    echo "NPM: $(npm -v)"
+    echo "Docker: $(docker --version)"
+    echo "Kind: $(kind --version)"
+    echo "Kubernetes: $(kubectl version --ouput=json)"
 
-    echo "Now start zsh through the 'zsh' command and you're ready to go!"
+    echo "\nNow start zsh through the 'zsh' command and you're ready to go!"
 }
 
 setup_ubuntu
