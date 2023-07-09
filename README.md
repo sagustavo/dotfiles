@@ -4,13 +4,14 @@ Here it sits the main configuration files for my WSL 2 Ubuntu setup.
 
 The file ``setup.sh`` holds the commands for setting up all you need. It installs the main development packages and technologies, as well as it configures your zsh terminal accordingly to what you're already familiar with.
 
-The easiest way to get the job done is just copying the file content, then pasting it in your Ubuntu shell. But another option is creating a file and pasting the ``setup.sh`` content into that, then executing it:
+A way of executing the script is creating a file and pasting the ``setup.sh`` content into it. Then you'd have to set the ``$GITHUB_ACCESS_TOKEN`` variable with the token generated in ``Github > Settings > Developer settings > Personal access tokens > Tokens (classic) > Generate new token``
 
+After that, you can finally execute the script:
 ```bash
 chmod +x setup.sh
 sudo ./setup.sh
+rm setup.sh
 ```
-
 
 ## WSL2 Setup
 

@@ -1,81 +1,83 @@
 #!/bin/bash
 
-# update package list and download them
-sudo apt update && sudo apt upgrade
+GITHUB_ACCESS_TOKEN=
 
-# install essential packages for development
-sudo apt install build-essential
+if [-z $GITHUB_ACCESS_TOKEN]
+then
+    echo 'Must provide credentials to get the dotfiles, because the repo is private'
+else
+    initial_setup
+    install_node & install_docker_kind_and_k8s & install_zsh &
+    wait
+    setup_shell
 
-# install git node and npm
-sudo apt install git node npm
+    zsh
 
-npm i -g npm n && n lts
+    git --version && node -v && npm -v && docker --version && kind --version && kubectl version
+fi
 
-# install docker - https://docs.docker.com/engine/install/ubuntu/
-sudo apt-get install ca-certificates curl gnupg
+# functions that do all the job
+function initial_setup() {
+    # update package list and download them
+    sudo apt update && sudo apt -y upgrade
 
-sudo install -m 0755 -d /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-sudo chmod a+r /etc/apt/keyrings/docker.gpg
+    # install essential packages for development
+    sudo apt install -y build-essential
+    sudo apt install -y git
+}
 
-echo \
-  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+function install_node() {
+    curl -sL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
 
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    sudo apt install -y nodejs
+}
 
-sudo usermod -aG docker $USER
+function install_docker_kind_and_k8s() {
+    # install docker - https://docs.docker.com/engine/install/ubuntu/
+    sudo sh -c "$(curl -fsSL https://get.docker.com)"
 
-# install kind - https://kind.sigs.k8s.io/docs/user/quick-start/#installing-from-release-binaries
-# For AMD64 / x86_64
-[ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.20.0/kind-linux-amd64
-chmod +x ./kind
-sudo mv ./kind /usr/local/bin/kind
+    sudo usermod -aG docker $USER
 
-# install k8s - https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
-curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
-echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
+    # install kind - https://kind.sigs.k8s.io/docs/user/quick-start/#installing-from-release-binaries
+    [ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.20.0/kind-linux-amd64
+    chmod +x ./kind
+    sudo mv ./kind /usr/local/bin/kind
 
-sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+    # install k8s - https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
+    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+    curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
+    echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
 
-# install zsh and oh my zsh - https://github.com/ohmyzsh/ohmyzsh
-sudo apt install -y zsh
+    sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+}
 
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+function install_zsh() {
+    # install zsh and oh my zsh - https://github.com/ohmyzsh/ohmyzsh
+    sudo apt install -y zsh
 
-# install p10k - https://github.com/romkatv/powerlevel10k#installation
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+    yes "n" | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-# install fonts for p10k
-sudo apt install -y fonts-powerline
+    # install p10k - https://github.com/romkatv/powerlevel10k#installation
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
-# apply config files
-cd ~ && mkdir setup && cd setup
+    # install fonts for p10k
+    sudo apt install -y fonts-powerline
+}
 
-git config --global user.email "gustax.dev@gmail.com"
-git config --global user.name "Gustavo H. S. Oliveira" 
+function setup_shell() {
+    # apply config files
+    cd ~ && mkdir setup && cd setup
 
-git init
-git clone https://github.com/gustavenrique/ubuntu-setup.git
+    git config --global user.email "gustax.dev@gmail.com"
+    git config --global user.name "Gustavo H. S. Oliveira"
 
-mv ./ubuntu-setup/{.,}* .
-rmdir ubuntu-setup
+    git init
+    echo -e "gustavenrique\n$GITHUB_ACCESS_TOKEN" | git clone https://github.com/gustavenrique/ubuntu-setup.git .
 
-# create symlink to reference the versioned files
-cd ~ && rm .bashrc .zshrc .p10k.zsh
+    # create symlink to reference the versioned files
+    cd ~ && rm .bashrc .zshrc .p10k.zsh
 
-ln -s ~/setup/.bashrc ~/.bashrc
-ln -s ~/setup/.zshrc ~/.zshrc
-ln -s ~/setup/.p10k.zsh ~/.p10k.zsh
-
-# check if everything is working fine
-zsh
-
-git --version
-node --version
-npm --version
-docker --version
-kind --version
-kubectl client --version
+    ln -s ~/setup/.bashrc ~/.bashrc
+    ln -s ~/setup/.zshrc ~/.zshrc
+    ln -s ~/setup/.p10k.zsh ~/.p10k.zsh
+}
