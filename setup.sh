@@ -52,7 +52,9 @@ setup_zsh() {
     cd ~ && git clone https://github.com/gustavenrique/ubuntu-setup.git ./setup
 
     # create symlink to reference the versioned files
-    rm .bashrc .zshrc .p10k.zsh
+    [ -e .bashrc ] && rm .bashrc
+    [ -e .zshrc ] && rm .zshrc
+    [ -e .p10k.zsh ] && rm .p10k.zsh
 
     ln -s ~/setup/.bashrc ~/.bashrc
     ln -s ~/setup/.zshrc ~/.zshrc
@@ -67,7 +69,7 @@ setup_ubuntu() {
     install_node & 
     install_docker_kind_and_k8s & 
     wait
-    
+
     install_zsh
     setup_zsh
     clear
