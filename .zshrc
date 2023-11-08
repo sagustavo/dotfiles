@@ -2,7 +2,8 @@ export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME="robbyrussell"
 
-plugins=(git zsh-shift-select)
+# TODO: configure dracula, zinit, autosuggestions
+plugins=(git zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -137,4 +138,4 @@ bindkey "^Z" undo
 
 ##############################################
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

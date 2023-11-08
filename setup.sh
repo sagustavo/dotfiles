@@ -22,10 +22,10 @@ initial_setup() {
 install_main_packages() {
     brew install -q \
         zsh-autosuggestions \
-        tmux \
         fzf \
         npm node \
         docker kind kubectl
+        # tmux \
 
     # install useful key bindings and fuzzy completion:
     yes | $(brew --prefix)/opt/fzf/install
