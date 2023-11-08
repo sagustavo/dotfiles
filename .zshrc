@@ -7,8 +7,7 @@ plugins=(git zsh-shift-select)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
+
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 source ~/powerlevel10k/powerlevel10k.zsh-theme
 
