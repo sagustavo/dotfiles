@@ -1,0 +1,81 @@
+{
+	"workbench.iconTheme": "material-icon-theme",
+	"terminal.integrated.defaultProfile.windows": "PowerShell",
+	"terminal.integrated.fontFamily": "JetBrainsMono Nerd Font Medium",
+	"[vue]": {
+		"editor.defaultFormatter": "Vue.volar",
+		"editor.formatOnSave": false,
+		"editor.autoClosingComments": "always",
+	},
+	"[javascript]": {
+		"editor.defaultFormatter": "vscode.typescript-language-features"
+	},
+	"editor.autoIndent": "advanced",
+	"workbench.preferredDarkColorTheme": "One Dark Pro Flat",
+	"tabnine.experimentalAutoImports": true,
+	"editor.fontFamily": "JetBrainsMono Nerd Font Medium",
+	"editor.fontLigatures": true,
+	"editor.fontWeight": "400",
+	"editor.fontSize": 14,
+	"workbench.colorTheme": "One Dark Pro Darker",
+	"[html]": {
+		"editor.defaultFormatter": "vscode.html-language-features"
+	},
+	"files.autoSaveDelay": 800,
+	"[python]": {
+		"editor.formatOnType": true
+	},
+	"prettier.jsxSingleQuote": true,
+	"prettier.singleQuote": true,
+	"[jsonc]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"prettier.useTabs": true,
+	"typescript.updateImportsOnFileMove.enabled": "always",
+	"[css]": {
+		"editor.defaultFormatter": "vscode.css-language-features"
+	},
+	"javascript.updateImportsOnFileMove.enabled": "always",
+	"hediet.vscode-drawio.resizeImages": null,
+	"php.executablePath": "/bin/php",
+	"[php]": {
+		"editor.defaultFormatter": "DEVSENSE.phptools-vscode"
+	},
+	"yaml.customTags": [
+		"!And",
+		"!And sequence",
+		"!If",
+		"!If sequence",
+		"!Not",
+		"!Not sequence",
+		"!Equals",
+		"!Equals sequence",
+		"!Or",
+		"!Or sequence",
+		"!FindInMap",
+		"!FindInMap sequence",
+		"!Base64",
+		"!Join",
+		"!Join sequence",
+		"!Cidr",
+		"!Ref",
+		"!Sub",
+		"!Sub sequence",
+		"!GetAtt",
+		"!GetAZs",
+		"!ImportValue",
+		"!ImportValue sequence",
+		"!Select",
+		"!Select sequence",
+		"!Split",
+		"!Split sequence"
+	],
+	"workbench.editor.empty.hint": "hidden",
+	"[sass]": {
+		"editor.defaultFormatter": "syler.sass-indented"
+	},
+	"editor.formatOnSave": true,
+}

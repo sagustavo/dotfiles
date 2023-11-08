@@ -1,48 +1,48 @@
 #!/bin/bash
 
 initial_setup() {
-    # update package list and download them
     sudo apt update && sudo apt -y upgrade
 
-    # install essential packages for development
-    sudo apt install -y build-essential bc
-    sudo apt install -y git
+    sudo apt install -y \
+        build-essential \
+        bc \
+        curl \
+        file \
+        git \
+        vim
+
+    # homebrew
+    test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
+    test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.bashrc
+
+    install_main_packages
 }
 
-install_node() {
-    curl -sL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+install_main_packages() {
+    brew install -q \
+        zsh-autosuggestions \
+        tmux \
+        fzf \
+        npm node \
+        docker kind kubectl
 
-    sudo apt install -y nodejs
-}
-
-install_docker_kind_and_k8s() {
-    # install docker - https://docs.docker.com/engine/install/ubuntu/
-    sudo sh -c "$(curl -fsSL https://get.docker.com)"
+    # install useful key bindings and fuzzy completion:
+    yes | $(brew --prefix)/opt/fzf/install
 
     sudo usermod -aG docker $USER
 
-    # install kind - https://kind.sigs.k8s.io/docs/user/quick-start/#installing-from-release-binaries
-    [ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.20.0/kind-linux-amd64
-    chmod +x ./kind
-    sudo mv ./kind /usr/local/bin/kind
-
-    # install k8s - https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
-    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-    curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
-    echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
-
-    sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+    install_zsh
 }
 
 install_zsh() {
     # install zsh and oh my zsh - https://github.com/ohmyzsh/ohmyzsh
-    sudo apt install -y zsh
+    brew install zsh
 
     yes "n" | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
     # install p10k - https://github.com/romkatv/powerlevel10k#installation
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
-    echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
 
     # install fonts for p10k
     sudo apt install -y fonts-powerline
@@ -51,28 +51,30 @@ install_zsh() {
 }
 
 setup_zsh() {
-    cd ~ && git clone https://github.com/gustavenrique/ubuntu-setup.git ./setup
+    cd ~ && git clone https://github.com/gustavenrique/dotfiles.git ./dotfiles
 
-    # create symlink to reference the versioned files
-    [ -e .bashrc ] && rm .bashrc
-    [ -e .zshrc ] && rm .zshrc
-    [ -e .p10k.zsh ] && rm .p10k.zsh
+    # create symlinks to reference the versioned files
+    files=("bashrc" "zshrc" "p10k.zsh" "vimrc")
 
-    ln -s ~/setup/.bashrc ~/.bashrc
-    ln -s ~/setup/.zshrc ~/.zshrc
-    ln -s ~/setup/.p10k.zsh ~/.p10k.zsh
+    for file in "${files[@]}"; do
+        [ -e "~/.${file}" ] && rm "~/.${file}"
+
+        ln -s "~/dotfiles/${file}" "~/.${file}"
+    done
 
     # change default shell
     chsh -s $(which zsh)
+
+    setup_ohmyzsh
 }
 
-setup_ubuntu() {
-    initial_setup
-    install_node & 
-    install_docker_kind_and_k8s & 
-    wait
+setup_ohmyzsh() {
+    # install ohmyzsh plugins
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/plugins/zsh-syntax-highlighting
+    git clone https://github.com/dracula/zsh.git "$ZSH/themes/dracula-prompt"
 
-    install_zsh
+    # install zinit
+    yes "y" | bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
 }
 
-setup_ubuntu
+initial_setup

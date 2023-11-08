@@ -1,4 +1,4 @@
-# Ubuntu Setup
+# Dotfiles
 
 Here it sits the main configuration files for my personal WSL2 Ubuntu setup.
 
@@ -10,7 +10,7 @@ The file ``setup.sh`` holds the commands for setting up all you need. It install
 
 1. Execute this command in your brand new linux:
 ```bash
-sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/gustavenrique/ubuntu-setup/main/setup.sh)"
+sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/gustavenrique/dotfiles/main/setup.sh)"
 ```
 
 2. After restarting the terminal, you should be using zsh by default. Now check if everything was installed correctly:
@@ -45,11 +45,11 @@ wsl --install
 After creating the Linux user, create the .wslconfig file:
 ```bash
 # Limit the resources that Ubuntu can use
-touch /mnt/c/Users/your_windows_user/.wslconfig
-code /mnt/c/Users/your_windows_user/.wslconfig
+touch /mnt/c/Users/YOUR_WINDOWS_USER/.wslconfig
+code /mnt/c/Users/YOUR_WINDOWS_USER/.wslconfig
 ```
 
-Then finally paste the following
+Then configure the wsl resources limits such as the following way
 ```bash
 [wsl2]
 memory=8GB
