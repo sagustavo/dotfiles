@@ -1,6 +1,6 @@
 # Dotfiles
 
-Here sit the main configuration files for my personal WSL 2 Ubuntu setup.
+This is a repo for my main dotfiles used in my personal WSL 2 Ubuntu setup.
 
 The file ``setup.sh`` installs the main development packages and technologies, as well as it configures the zsh shell.
 
