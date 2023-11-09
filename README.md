@@ -13,9 +13,12 @@ After executing the setup script, the powerful zsh can already be used, having t
 - Auto suggestions
 - Powershell-like text editing
 
-Besides that, a couple of programs will be installed, such as git, node, vim, docker, kubectl, fzf and others
+![zsh](https://github.com/gustavenrique/dotfiles/assets/81171856/bbe07573-7e58-42e9-a467-91a8f7070ef6)
 
-Feel free to use it!
+Besides that, a couple of programs will be installed, such as git, node, vim, docker, kubectl, fzf and others.
+
+Feel free to use it and enjoy! 🙂
+
 ---
 
 # WSL2 Setup
