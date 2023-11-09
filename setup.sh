@@ -53,7 +53,7 @@ install_zsh() {
 setup_zsh() {
     cd ~ && git clone https://github.com/gustavenrique/dotfiles.git ./dotfiles
 
-    # create symlinks to reference the versioned files
+    # create symlinks to reference the versioned dotfiles
     files=("bashrc" "zshrc" "p10k.zsh" "vimrc")
 
     for file in "${files[@]}"; do
@@ -69,12 +69,11 @@ setup_zsh() {
 }
 
 setup_ohmyzsh() {
-    # install ohmyzsh plugins
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/plugins/zsh-syntax-highlighting
-    git clone https://github.com/dracula/zsh.git "$ZSH/themes/dracula-prompt"
-
     # install zinit
-    yes "y" | bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
+    yes | bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
+
+    # install ohmyzsh plugins
+    # git clone https://github.com/dracula/zsh.git "$ZSH/themes/dracula-prompt"
 }
 
 initial_setup
