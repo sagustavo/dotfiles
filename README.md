@@ -8,7 +8,7 @@ The file ``setup.sh`` installs the main development packages and technologies, a
 sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/gustavenrique/dotfiles/main/setup.sh)"
 ```
 
-After executing the setup script, the powerful zsh can already be used, having the main following features:
+Once the setup script is executed, the powerful zsh can already be used with some cool features, such as:
 - Fast syntax highlighting
 - Auto suggestions
 - Powershell-like text editing
