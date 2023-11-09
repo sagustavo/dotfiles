@@ -21,7 +21,7 @@ initial_setup() {
 
 install_main_packages() {
     brew install -q \
-        zsh-autosuggestions \
+        # zsh-autosuggestions \
         fzf \
         npm node \
         docker kind kubectl

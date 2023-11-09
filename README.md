@@ -7,6 +7,15 @@ The file ``setup.sh`` installs the main development packages and technologies, a
 ```bash
 sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/gustavenrique/dotfiles/main/setup.sh)"
 ```
+
+After executing the setup script, the powerful zsh can already be used, having the main following features:
+- Fast syntax highlighting
+- Auto suggestions
+- Powershell-like text editing
+
+Besides that, a couple of programs will be installed, such as git, node, vim, docker, kubectl, fzf and others
+
+Feel free to use it!
 ---
 
 # WSL2 Setup
