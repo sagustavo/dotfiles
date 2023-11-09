@@ -26,7 +26,7 @@ touch /mnt/c/Users/YOUR_WINDOWS_USER/.wslconfig
 code /mnt/c/Users/YOUR_WINDOWS_USER/.wslconfig
 ```
 
-Then configure the wsl resources limits such as the following way
+Then configure the wsl resources limits like this
 ```bash
 [wsl2]
 memory=8GB
