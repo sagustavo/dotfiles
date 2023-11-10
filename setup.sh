@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 initial_setup() {
     sudo apt update && sudo apt -y upgrade
@@ -12,7 +12,7 @@ initial_setup() {
         vim
 
     # homebrew
-    yes | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    yes | bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     (echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/$USER/.bashrc
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
@@ -40,7 +40,7 @@ install_main_packages() {
 
 install_zsh() {
     # install zsh and oh my zsh - https://github.com/ohmyzsh/ohmyzsh
-    brew install zsh
+    sudo apt install -y zsh
 
     yes "n" | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
@@ -65,18 +65,12 @@ setup_zsh() {
         ln -s ~/dotfiles/.${file} ~/.${file}
     done
 
+    yes | bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
+
     # change default shell
     chsh -s $(which zsh)
 
-    setup_ohmyzsh
-}
-
-setup_ohmyzsh() {
-    # install zinit
-    yes | bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
-
-    # install ohmyzsh plugins
-    # git clone https://github.com/dracula/zsh.git "$ZSH/themes/dracula-prompt"
+    zsh
 }
 
 initial_setup
