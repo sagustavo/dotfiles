@@ -8,9 +8,7 @@ initial_setup() {
         build-essential gcc \
         bc \
         curl \
-        file \
-        git \
-        vim
+        file
 
     install_main_packages
 }
