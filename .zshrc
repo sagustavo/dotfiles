@@ -1,6 +1,6 @@
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="dracula"
+# ZSH_THEME="dracula"
 
 plugins=(git)
 
@@ -154,3 +154,4 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma-continuum/fast-syntax-highlighting
+# zinit light dracula/dracula

@@ -60,9 +60,9 @@ setup_zsh() {
     files=("bashrc" "zshrc" "p10k.zsh" "vimrc")
 
     for file in "${files[@]}"; do
-        [ -e "~/.${file}" ] && rm "~/.${file}"
+        [ -e ~/.${file} ] && rm -rf ~/.${file}
 
-        ln -s "~/dotfiles/${file}" "~/.${file}"
+        ln -s ~/dotfiles/.${file} ~/.${file}
     done
 
     # change default shell
