@@ -5,7 +5,7 @@ This is a repo for my main dotfiles used in my personal WSL 2 Ubuntu setup.
 The file ``setup.sh`` installs the main development packages and technologies, as well as it configures the zsh shell.
 
 ```bash
-sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/gustavenrique/dotfiles/main/setup.sh)"
+sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/gustavenrique/dotfiles/main/setup.sh)"
 ```
 
 Once the setup script is executed, the powerful zsh can already be used with some cool features, such as:
