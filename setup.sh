@@ -12,24 +12,27 @@ initial_setup() {
         vim
 
     # homebrew
-    test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
-    test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-    echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.bashrc
+    yes | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    (echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/$USER/.bashrc
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
     install_main_packages
 }
 
 install_main_packages() {
     brew install -q \
-        # zsh-autosuggestions \
         fzf \
         npm node \
-        docker kind kubectl
+        kind kubectl
+        # zsh-autosuggestions \
         # tmux \
 
     # install useful key bindings and fuzzy completion:
     yes | $(brew --prefix)/opt/fzf/install
 
+    # docker
+    sudo sh -c "$(curl -fsSL https://get.docker.com)"
+    sudo chmod 666 /var/run/docker.sock
     sudo usermod -aG docker $USER
 
     install_zsh
