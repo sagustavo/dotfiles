@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 initial_setup() {
     sudo apt update && sudo apt -y upgrade
