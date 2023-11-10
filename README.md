@@ -1,6 +1,6 @@
 # Dotfiles
 
-Here it sits the main configuration files for my personal WSL 2 Ubuntu setup.
+This is a repo for my main dotfiles used in my personal WSL 2 Ubuntu setup.
 
 The file ``setup.sh`` installs the main development packages and technologies, as well as it configures the zsh shell.
 
@@ -8,14 +8,17 @@ The file ``setup.sh`` installs the main development packages and technologies, a
 sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/gustavenrique/dotfiles/main/setup.sh)"
 ```
 
-After executing the setup script, the powerful zsh can already be used, having the main following features:
+Once the setup script is executed, the powerful zsh can already be used with some cool features, such as:
 - Fast syntax highlighting
 - Auto suggestions
 - Powershell-like text editing
 
-Besides that, a couple of programs will be installed, such as git, node, vim, docker, kubectl, fzf and others
+![zsh](https://github.com/gustavenrique/dotfiles/assets/81171856/bbe07573-7e58-42e9-a467-91a8f7070ef6)
 
-Feel free to use it!
+Besides that, a couple of programs will be installed, such as git, node, vim, docker, kubectl, fzf and others.
+
+Feel free to use it and enjoy! 🙂
+
 ---
 
 # WSL2 Setup
