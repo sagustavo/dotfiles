@@ -1,20 +1,21 @@
 #!/bin/bash
 
 initial_setup() {
+    # homebrew
+    yes | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    (echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/${USER}/.bashrc
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+    # essential packages
     sudo apt update && sudo apt -y upgrade
 
     sudo apt install -y \
-        build-essential \
+        build-essential gcc \
         bc \
         curl \
         file \
         git \
         vim
-
-    # homebrew
-    yes | bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    (echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/$USER/.bashrc
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
     install_main_packages
 }
