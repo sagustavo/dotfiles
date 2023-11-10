@@ -154,6 +154,10 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+zinit light-mode for \
+    zsh-users/zsh-autosuggestions \
+    zdharma-continuum/fast-syntax-highlighting
+
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
 zinit light-mode for \
@@ -163,7 +167,3 @@ zinit light-mode for \
     zdharma-continuum/zinit-annex-rust
 
 ### End of Zinit's installer chunk
-
-zinit light-mode for \
-    zsh-users/zsh-autosuggestions \
-    zdharma-continuum/fast-syntax-highlighting
