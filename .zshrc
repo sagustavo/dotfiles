@@ -13,6 +13,8 @@ autoload -Uz _zinit
 ###################################
 
 export ZSH="$HOME/.oh-my-zsh"
+export DOTNET_ROOT=$HOME/.dotnet
+export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
 
 # ZSH_THEME="dracula"
 
@@ -134,19 +136,6 @@ for key     kcap    seq           widget              arg (
   zle -N key-$key
   bindkey ${terminfo[$kcap]-$seq} key-$key
 }
-# ctrl+a https://stackoverflow.com/a/68987551/13658418
-function widget::select-all() {
-  local buflen=$(echo -n "$BUFFER" | wc -m | bc)
-  CURSOR=$buflen  
-  zle set-mark-command
-  while [[ $CURSOR > 0 ]]; do
-    zle beginning-of-line
-  done
-}
-zle -N widget::select-all
-bindkey '^a' widget::select-all
-# ctrl+z
-bindkey "^Z" undo
 
 ##############################################
 

@@ -36,6 +36,13 @@ install_main_packages() {
     sudo chmod 666 /var/run/docker.sock
     sudo usermod -aG docker $USER
 
+    install_dotnet
+}
+
+install_dotnet() {
+    cd && wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
+    chmod +x ./dotnet-install.sh && ./dotnet-install.sh --version latest
+
     install_zsh
 }
 
