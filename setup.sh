@@ -6,9 +6,12 @@ initial_setup() {
 
     sudo apt install -y \
         build-essential gcc git \
+        libxcb-xinerama0 libxcb-cursor0 libnss3 \
         bc \
         curl \
         file
+
+    # create symlinks for anki add-ons to ~/.local/share/Anki2/addons21
 
     install_main_packages
 }

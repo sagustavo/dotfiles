@@ -1,7 +1,7 @@
 {
 	"workbench.iconTheme": "material-icon-theme",
 	"terminal.integrated.defaultProfile.windows": "PowerShell",
-	"terminal.integrated.fontFamily": "JetBrainsMono Nerd Font Medium",
+	"terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
 	"[vue]": {
 		"editor.defaultFormatter": "Vue.volar",
 		"editor.formatOnSave": false,
@@ -13,7 +13,7 @@
 	"editor.autoIndent": "advanced",
 	"workbench.preferredDarkColorTheme": "One Dark Pro Flat",
 	"tabnine.experimentalAutoImports": true,
-	"editor.fontFamily": "JetBrainsMono Nerd Font Medium",
+	"editor.fontFamily": "JetBrainsMono Nerd Font",
 	"editor.fontLigatures": true,
 	"editor.fontWeight": "400",
 	"editor.fontSize": 14,
