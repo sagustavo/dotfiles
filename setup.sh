@@ -5,7 +5,7 @@ initial_setup() {
     sudo apt update && sudo apt -y upgrade
 
     sudo apt install -y \
-        build-essential gcc \
+        build-essential gcc git \
         bc \
         curl \
         file
