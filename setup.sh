@@ -5,13 +5,15 @@ initial_setup() {
     sudo apt update && sudo apt -y upgrade
 
     sudo apt install -y \
-        build-essential gcc git \
-        libxcb-xinerama0 libxcb-cursor0 libnss3 \
-        bc \
+        build-essential gcc git neofetch \
+        libxcb-xinerama0 libxcb-cursor0 libnss3 mpv mplayer \
+        gnome-browser-connector copyq copyq-plugins \
+        dconf-cli \
+        bc cmake bat \
         curl \
         file
 
-    # create symlinks for anki add-ons to ~/.local/share/Anki2/addons21
+    # backup copyq config: /home/gusta/.config/autostart/copyq.desktop
 
     install_main_packages
 }
@@ -27,7 +29,7 @@ install_main_packages() {
         npm node \
         kind kubectl
         # zsh-autosuggestions \
-        # tmux \
+        tmux \
 
     # install useful key bindings and fuzzy completion:
     yes | $(brew --prefix)/opt/fzf/install
@@ -66,7 +68,7 @@ setup_zsh() {
     cd ~ && git clone https://github.com/gustavenrique/dotfiles.git ./dotfiles
 
     # create symlinks to reference the versioned dotfiles
-    files=("bashrc" "zshrc" "p10k.zsh" "vimrc")
+    files=("bashrc" "zshrc" "p10k.zsh" "vimrc", "XCompose")
 
     for file in "${files[@]}"; do
         [ -e ~/.${file} ] && rm -rf ~/.${file}
@@ -78,6 +80,11 @@ setup_zsh() {
 
     # change default shell
     chsh -s $(which zsh)
+
+    # create symlinks for anki add-ons to ~/.local/share/Anki2/addons21
+
+    # git clone git clone https://github.com/dracula/gnome-terminal ~/dev/dracula-gnome
+    # cd ~/dev/dracula-gnome && ./install.sh -s Dracula -p Dracula --install-dircolors
 
     zsh
 }

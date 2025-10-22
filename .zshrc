@@ -157,12 +157,13 @@ zinit light-mode for \
 
 ### End of Zinit's installer chunk
 
-# Load a few important annexes, without Turbo
-# (this is currently required for annexes)
-zinit light-mode for \
-    zdharma-continuum/zinit-annex-as-monitor \
-    zdharma-continuum/zinit-annex-bin-gem-node \
-    zdharma-continuum/zinit-annex-patch-dl \
-    zdharma-continuum/zinit-annex-rust
-
-### End of Zinit's installer chunk
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+--style=full 
+--layout=reverse
+--multi 
+--ghost=Search 
+--preview="bat --theme=\"OneHalfDark\" --color=always --line-range :500 {}"
+--color=dark
+--color=fg:-1,bg:-1,hl:#5fff87,fg+:-1,bg+:-1,hl+:#ffaf5f
+--color=info:#af87ff,prompt:#5fff87,pointer:#ff87d7,marker:#ff87d7,spinner:#ff87d7
+'
