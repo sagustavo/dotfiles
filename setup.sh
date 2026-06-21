@@ -65,7 +65,7 @@ install_zsh() {
 }
 
 setup_zsh() {
-    cd ~ && git clone https://github.com/gustavenrique/dotfiles.git ./dotfiles
+    cd ~ && git clone -b ubuntu https://github.com/gustavenrique/dotfiles.git ./dotfiles
 
     # create symlinks to reference the versioned dotfiles
     files=("bashrc" "zshrc" "p10k.zsh" "vimrc", "XCompose")
