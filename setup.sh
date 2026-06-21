@@ -5,7 +5,7 @@ initial_setup() {
     sudo apt update && sudo apt -y upgrade
 
     sudo apt install -y \
-        build-essential gcc git neofetch \
+        build-essential gcc git fastfetch \
         libxcb-xinerama0 libxcb-cursor0 libnss3 mpv mplayer \
         gnome-browser-connector copyq copyq-plugins \
         dconf-cli \
