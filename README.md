@@ -8,7 +8,7 @@ If you wanna try it out, execute the following script **using a non-root user**:
 
 ```bash
 # mind the fact that some of your dotfiles could be actually **entirely** replaced
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/gustavenrique/dotfiles/main/setup.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/gustavenrique/dotfiles/ubuntu/setup.sh)"
 ```
 
 Once the setup script is executed, the powerful zsh can already be used with some cool features, such as:
