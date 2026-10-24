@@ -11,13 +11,13 @@
 		"editor.defaultFormatter": "vscode.typescript-language-features"
 	},
 	"editor.autoIndent": "advanced",
-	"workbench.preferredDarkColorTheme": "One Dark Pro Flat",
+	"workbench.preferredDarkColorTheme": "Dracula Theme Soft",
 	"tabnine.experimentalAutoImports": true,
 	"editor.fontFamily": "JetBrainsMono Nerd Font",
 	"editor.fontLigatures": true,
 	"editor.fontWeight": "400",
 	"editor.fontSize": 14,
-	"workbench.colorTheme": "One Dark Pro Darker",
+	"workbench.colorTheme": "Dracula Theme Soft",
 	"[html]": {
 		"editor.defaultFormatter": "vscode.html-language-features"
 	},
